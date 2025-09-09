@@ -8,6 +8,7 @@ function convert(amount) {
     }
 
     let map = new Map([[100, 0], [50, 0], [20, 0], [10, 0], [5, 0], [2, 0], [1, 0]]);
+
     for (let m of map) {
         while (amount >= m[0]) {
             amount -= m[0];
@@ -16,17 +17,11 @@ function convert(amount) {
         }
         if (amount === 0) break;
     }
-    removeZeroKeys(map);
+
+    map.forEach((v, k) => {if(v === 0) map.delete(k);});
+
     return map;
 }
-
-const removeZeroKeys = (map) => {
-    map.forEach((value, key) => {
-        if (value === 0) {
-            map.delete(key);
-        }
-    });
-};
 
 // 2
 function rot13(text) {
@@ -44,12 +39,14 @@ function rot13(text) {
     return result;
 }
 
-// 3 TODO lexical order sort
-function sort(arr, ascending=true) {
+// 3
+function lexicalArraySort(arr, ascending=true) {
     if (!Array.isArray(arr)) throw new TypeError('First parameter must be an array');
-    else {
 
-    }
+    if(ascending) arr.sort((a, b) => a.localeCompare(b));
+    else arr.sort((a, b) => a.localeCompare(b)).reverse();
+    return arr;
+
 }
 
 // 4
@@ -90,7 +87,7 @@ function extractDates(s) {
     if (typeof s !== 'string') {
         throw new TypeError('First parameter must be a string');
     }
-    return s.match(/[0-9]{2}\.[0-9]{2}\.[0-9]{4}/g);
+    return s.match(/\d{2}\.\d{2}\.\d{4}/g) ?? `No dates could be found for input "${s}"`;
 }
 
 function funcCalls(){
@@ -106,6 +103,9 @@ function funcCalls(){
 
 // 3
     console.log("\n3");
+    console.log(lexicalArraySort(["a", "aa", "o", "ä"], false));
+    console.log(lexicalArraySort(["a", "aa", "o", "ä"], true));
+    console.log(lexicalArraySort(['a', 'aa', 'o', 'ä']));
 
 // 4
     console.log("\n4");
@@ -122,11 +122,13 @@ function funcCalls(){
     console.log("\n6");
     generate(";");
     const add = generate('*');
-    console.log(add(3, 4)); // the value is 12 printed on the console
+    console.log(add(3, 4));
 
 // 7
     console.log("\n7");
-    console.log(extractDates("fjeiownfriove;angiorejgiqgj12,33,5443gkeogjreo11.12.2007kofjew9jirejgiorq11.12.12odjfoiejf23.03..2022kfwofeo01.01.2022"));
+    // should extract 11.12.2010 and 01.01.2022
+    console.log(extractDates("fjeiownfriove;angiorejgiqgj12,33,5443gkeogjreo11.12.2010kofjew9jirejgiorq11.12.12odjfoiejf23.03..2022kfwofeo01.01.2022"));
+    console.log(extractDates("fjeiwoajfeiogj"))
 }
 
 funcCalls();
