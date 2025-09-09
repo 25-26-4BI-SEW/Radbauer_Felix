@@ -45,7 +45,7 @@ function rot13(text) {
 }
 
 // 3 TODO lexical order sort
-function ue3(arr, ascending=true) {
+function sort(arr, ascending=true) {
     if (!Array.isArray(arr)) throw new TypeError('First parameter must be an array');
     else {
 
