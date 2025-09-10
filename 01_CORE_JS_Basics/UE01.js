@@ -52,7 +52,15 @@ function lexicalArraySort(arr, ascending=true) {
 // 4
 function filterArr(array) {
     if (!Array.isArray(array)) throw new TypeError('First parameter must be an array');
-    else return array.filter((item) => item % 2 === 0);
+    // return array.filter((item) => item % 2 === 0);
+    let result = [];
+    for (const element of array) {
+        if (typeof element === 'number' && element % 2 === 0) {
+            result.push(element);
+        }
+    }
+    return result;
+
 }
 
 // 5
@@ -65,34 +73,31 @@ function test(fu, arg, exp) {
 
 // 6
 function generate(op) {
-    if (op.match(/[+\-*\/]/) && op.length === 1) {
-        switch (op) {
-            case "+":
-                return (param1, param2) => param1 + param2;
-            case "-":
-                return (param1, param2) => param1 - param2;
-            case "*":
-                return (param1, param2) => param1 * param2;
-            case "/":
-                return (param1, param2) => param1 / param2;
-        }
-    } else {
-        console.error("\"op\" muss ein Rechenoperator '+', '-', '*' oder '/' sein.");
-        return NaN;
+    switch (op) {
+        case "+":
+            return (param1, param2) => param1 + param2;
+        case "-":
+            return (param1, param2) => param1 - param2;
+        case "*":
+            return (param1, param2) => param1 * param2;
+        case "/":
+            return (param1, param2) => param1 / param2;
+        default:
+            console.error("op must be '+', '-', '*' or '/'. Your input: \"" + op + "\"b");
+            return null;
     }
 }
 
 // 7
 function extractDates(s) {
-    if (typeof s !== 'string') {
-        throw new TypeError('First parameter must be a string');
-    }
+    if (typeof s !== 'string') throw new TypeError('First parameter must be a string')
     return s.match(/\d{2}\.\d{2}\.\d{4}/g) ?? `No dates could be found for input "${s}"`;
 }
 
 function funcCalls(){
 // 1
     console.log("\n1");
+    console.log(convert("hello"));
     console.log(convert(681));
     console.log(convert(3697));
 
@@ -111,18 +116,21 @@ function funcCalls(){
     console.log("\n4");
     console.log(filterArr([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]));
     console.log(filterArr([4, 2, 6, 8, 3, 16, 94, 3, 1, 7, 12]));
+    console.log(filterArr([1, 2, 3, 4, 'hello', true, [1,2,4,33,"fr?"]]));
 
 // 5
     console.log("\n5");
     console.log(test((item) => Math.pow(item, 2), 5, 25));
     console.log(test((item) => Math.pow(item, 2), 5, 26));
     console.log(test((item) => Math.pow(item, 10), 10, 100));
-
+    console.log(test(rot13, "Hallo", "Unyyb"));
+	
 // 6
     console.log("\n6");
-    generate(";");
+    console.log(generate(";"));
     const add = generate('*');
     console.log(add(3, 4));
+    console.log(generate('-')(100, 31));
 
 // 7
     console.log("\n7");
