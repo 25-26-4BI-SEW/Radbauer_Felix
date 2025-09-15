@@ -18,13 +18,21 @@ function convert(amount) {
         if (amount === 0) break;
     }
 
-    map.forEach((v, k) => {if(v === 0) map.delete(k);});
+    map.forEach((v, k) => {
+        if(v === 0) map.delete(k);
+    });
 
     return map;
 }
 
 // 2
 function rot13(text) {
+    
+    if(typeof text !== "string") {
+        console.error("param 'text' must be a string");
+	return "";
+    }
+
     text = String(text);
     let result = '';
     for (let i = 0; i < text.length; i++) {
@@ -63,7 +71,6 @@ function filterArr(array) {
         }
     }
     return result;
-
 }
 
 // 5
@@ -86,7 +93,7 @@ function generate(op) {
         case "/":
             return (param1, param2) => param1 / param2;
         default:
-            console.error("op must be '+', '-', '*' or '/'. Your input: \"" + op + "\"b");
+            console.error("op must be '+', '-', '*' or '/'. Your input: \"" + op + "\"");
             return null;
     }
 }
@@ -108,6 +115,7 @@ function funcCalls(){
     console.log("\n2");
     console.log(rot13("hällo"));
     console.log(rot13(rot13("hällo")));
+    console.log(rot13(1));
 
 // 3
     console.log("\n3");
