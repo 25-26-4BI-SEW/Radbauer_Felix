@@ -29,9 +29,12 @@ function rot13(text) {
     let result = '';
     for (let i = 0; i < text.length; i++) {
         let code = text[i].charCodeAt(0);
-        if (code >= 65 && code <= 90) { // Uppercase A-Z
+        
+	if (code >= 65 && code <= 90) { // Uppercase A-Z
             code = (code - 65 + 13) % 26 + 65;
-        } else if (code >= 97 && code <= 122) { // Lowercase a-z
+        }
+
+	else if (code >= 97 && code <= 122) { // Lowercase a-z
             code = (code - 97 + 13) % 26 + 97;
         }
         result += String.fromCharCode(code);
