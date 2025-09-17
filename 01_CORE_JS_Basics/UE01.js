@@ -7,7 +7,7 @@ function convert(amount) {
         return new Map();
     }
 
-    let map = new Map([[100, 0], [50, 0], [20, 0], [10, 0], [5, 0], [2, 0], [1, 0]]);
+    let map = new Map([[200, 0], [100, 0], [50, 0], [20, 0], [10, 0], [5, 0], [2, 0], [1, 0]]);
 
     for (let m of map) {
         while (amount >= m[0]) {
