@@ -113,4 +113,4 @@ const personObject = {
 
 personObject.func();
 personObject.arrow();
-// Arrow Functions übernehmen this von außen; normale Funktionen setzen this auf das Objekt, das sie aufruft.
+// Arrow Functions übernehmen `this` von außen; bei normalen Funktionen is `this` das Objekt, das sie aufruft.
