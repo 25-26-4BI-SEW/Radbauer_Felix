@@ -107,10 +107,10 @@ const personObject = {
     func: function () {
         console.log(this.name);
     },
-    arrow: () => {
-        console.log(this.name);
-    }
+    arrow: () => console.log(this.name)
+
 }
 
 personObject.func();
 personObject.arrow();
+// Arrow Functions übernehmen this von außen; normale Funktionen setzen this auf das Objekt, das sie aufruft.
