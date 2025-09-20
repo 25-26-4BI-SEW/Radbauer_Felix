@@ -1,5 +1,6 @@
 'use strict';
 
+
 // 1
 const x = {
     y: {
@@ -14,9 +15,8 @@ const v = {
     }
 };
 
-
 // 3
-
+v.prop = 12;
 
 // 4
 function debugObject(obj) {
@@ -37,36 +37,19 @@ function debugObject(obj) {
 }
 
 // 5
-function debugObeject(obj1, obj2) {
+function equals(obj1, obj2) {
+    const keys1 = Object.keys(obj1);
+    const keys2 = Object.keys(obj2);
 
+    if (keys1.length !== keys2.length) return false;
+    for (const key in keys1) {
+        if (!(key in keys2)) return false;
+    }
+    for (const key in keys2) {
+        if (!(key in keys1)) return false;
+    }
+    return true;
 }
-
-
-// 6
-
-
-// 7 - see further down
-
-
-// 1
-console.log("User Story 1:");
-console.log(x.y.z);
-
-// 2
-console.log("User Story 2:");
-console.log(v.v().v)
-
-// 3
-console.log("User Story 3:");
-
-// 4
-console.log("User Story 4:");
-debugObject({a: 1, b: 2, c: 3});
-console.log(Object.values(x) instanceof Array);
-
-// 5
-console.log("User Story 5:");
-
 
 // 6
 const person = {
@@ -78,7 +61,46 @@ const person = {
     }
 };
 
+const {name, address: {city}} = person;
+
+console.log(name);
+console.log(city);
+
+const personExtended = {
+    ...person,
+    email: "maya@example.com",
+    age: 28
+}
+
+// Function Calls
+
+// 1
+console.log("User Story 1:");
+console.log(x.y.z);
+
+// 2
+console.log("\nUser Story 2:");
+console.log(v.v().v)
+
+// 3
+console.log("\nUser Story 3:");
+console.log(v.prop);
+
+// 4
+console.log("\nUser Story 4:");
+debugObject({a: 1, b: 2, c: 3});
+
+// 5
+console.log("\nUser Story 5:");
+console.log(equals({a: 1, b: 2, c: 3}, {a: 1, b: 2, c: 3}));
+console.log(equals([1, 2, 3], [1, 2, 3]));
+
+// 6
+console.log("\nUser Story 6:");
+console.log(personExtended);
+
 // 7
+console.log("\nUser Story 7:");
 const personObject = {
     name: "John",
     age: 42,
