@@ -1,6 +1,5 @@
 'use strict';
 
-
 // 1
 const x = {
     y: {
@@ -42,12 +41,13 @@ function equals(obj1, obj2) {
     const keys2 = Object.keys(obj2);
 
     if (keys1.length !== keys2.length) return false;
-    for (const key in keys1) {
+
+    for (const key in keys1)
         if (!(key in keys2)) return false;
-    }
-    for (const key in keys2) {
+
+    for (const key in keys2)
         if (!(key in keys1)) return false;
-    }
+
     return true;
 }
 
