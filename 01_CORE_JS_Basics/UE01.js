@@ -63,14 +63,14 @@ function lexicalArraySort(arr, ascending=true) {
 // 4
 function filterArr(array) {
     if (!Array.isArray(array)) throw new TypeError('First parameter must be an array');
-    // return array.filter((item) => item % 2 === 0);
-    let result = [];
-    for (const element of array) {
-        if (typeof element === 'number' && element % 2 === 0) {
-            result.push(element);
-        }
-    }
-    return result;
+    return array.filter((item) => typeof item === "number" && item % 2 === 0);
+    // let result = [];
+    // for (const element of array) {
+    //     if (typeof element === 'number' && element % 2 === 0) {
+    //         result.push(element);
+    //     }
+    // }
+    // return result;
 }
 
 // 5
