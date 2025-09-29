@@ -1,0 +1,79 @@
+// -1 is returned if a/the parameter has the wrong type
+// -2 is returned if a/the parameter has a wrong format
+
+export function rgbToHex(r, g, b) {
+    if (![r, g, b].every(n => Number.isInteger(n) && n > 0)) return -1;
+    const toHex = (n) => {
+        const hex = n.toString(16);
+        return hex.length === 1 ? `0${hex}` : hex;
+    }
+    return "#" + toHex(r) + toHex(g) + toHex(b);
+}
+
+export function rgbFunctionToHex(rgbFunc) {
+    if (typeof rgbFunc !== 'string') {
+        console.error('The argument must be a string');
+        return -1;
+    }
+    if (!rgbFunc.match(/rgb\(\d{1,3}%?,\d{1,3}%?,\d{1,3}%?\)/)) {
+        console.error("The argument must be a functional rgb() notation like 'rgb(187,22%,88)'");
+        return -2;
+    }
+
+    rgbFunc = rgbFunc.replace("rgb(", "");
+    rgbFunc = rgbFunc.replace(")", "");
+
+    const colorValues = rgbFunc.split(",");
+    let hexString = "";
+
+    for (const cV of colorValues) {
+        if (!cV.includes("%")) {
+            hexString += Number(cV).toString(16);
+        } else if (cV.indexOf("%") === cV.length - 1) {
+            let cVPercentage = Number(cV.replace("%", ""));
+            cVPercentage = Math.round(cVPercentage * 2.56);
+            hexString += cVPercentage.toString(16);
+        } else console.error("% is not correctly placed" + cV);
+    }
+    return hexString;
+}
+
+export function hexToRgb(hexString, isPercentage) {
+
+    if (typeof hexString !== 'string') {
+        console.error('The argument must be a string');
+        return -1;
+    }
+
+    hexString = hexString.substring(1);
+
+    if (hexString.match(/^[a-fA-F0-9]{3}$/))
+        hexString = shortHexToLongHex(hexString);
+
+    if (!hexString.match(/^[a-fA-F0-9]{6}$/)) {
+        console.error('The argument must be a hexadecimal value e.g #FF22CC or use the short notation #F2C (case-insensitive)');
+        return -2;
+    } else {
+        let result = "rgb(";
+        const r = parseInt(hexString.substring(0, 2), 16),
+            g = parseInt(hexString.substring(2, 4),16),
+            b = parseInt(hexString.substring(4, 6), 16);
+
+        if(!isPercentage) {
+            result += `${r}, ${g}, ${b})`;
+            return result;
+        } else {
+            result += `${Math.round(r/2.56)}%, ${Math.round(g/2.56)}%, ${Math.round(b/2.56)}%)`;
+            return result;
+        }
+    }
+}
+
+const shortHexToLongHex = (hexString) => {
+    let result = "";
+    for (let i = 0; i < hexString.length * 2; i++) {
+        result += hexString.charAt(i);
+        result += hexString.charAt(i);
+    }
+    return result;
+}
