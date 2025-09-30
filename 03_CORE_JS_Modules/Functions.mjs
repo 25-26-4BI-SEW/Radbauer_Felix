@@ -76,4 +76,5 @@ const shortHexToLongHex = (hexString) => {
         result += hexString.charAt(i);
     }
     return result;
-}
+};
+
