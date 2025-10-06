@@ -28,7 +28,7 @@ function debugObject(obj) {
     // for (const o in obj) {
     //     console.log(obj[o]);
     // }
-    console.log(Object.values(obj))
+    console.log(Object.values(obj));
     console.log("Key-Value-Pairs:");
     for (const o in obj) {
         console.log(o + ": " + obj[o]);
@@ -42,11 +42,9 @@ function equals(obj1, obj2) {
 
     if (keys1.length !== keys2.length) return false;
 
-    for (const key in keys1)
-        if (!(key in keys2)) return false;
-
-    for (const key in keys2)
-        if (!(key in keys1)) return false;
+    for (const key of keys1) {
+        if (!keys2.includes(key)) return false;
+    }
 
     return true;
 }
@@ -94,10 +92,16 @@ debugObject({a: 1, b: 2, c: 3});
 console.log("\nUser Story 5:");
 console.log(equals({a: 1, b: 2, c: 3}, {a: 1, b: 2, c: 3}));
 console.log(equals([1, 2, 3], [1, 2, 3]));
+console.log(equals({a: 1, b: 2, c: 3}, {a: 1, b: 2}));
+console.log(equals({a: 1, f: 2, c: 3}, {a: 1, b: 2, c: 3}));
+console.log(equals({1: 1, 2: 2, 3: 3}, {2: 2, 3: 3, 4: 4}));
+
 
 // 6
 console.log("\nUser Story 6:");
-console.log(personExtended);
+console.log(name);
+console.log(city);
+console.log("Person extended:" + personExtended);
 
 // 7
 console.log("\nUser Story 7:");
@@ -114,3 +118,29 @@ const personObject = {
 personObject.func();
 personObject.arrow();
 // Arrow Functions übernehmen `this` von außen; bei normalen Funktionen is `this` das Objekt, das sie aufruft.
+
+const object = {
+    name: "John",
+    details: {
+        age: 32,
+        profession: 'developer'
+    }
+};
+
+const ob1 = {name: "alex", country: "linz"};
+const ob2 = {country: "alex"};
+
+console.log({...ob1, ...ob2});
+
+const {details:{name1}} = object;
+
+console.log(name1);
+
+const h = {
+    v: 10,
+    h: function () {
+        return this.v*2
+    }
+}
+
+console.log(h.h());
