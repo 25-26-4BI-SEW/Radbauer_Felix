@@ -1,15 +1,22 @@
 // -1 is returned if a/the parameter has the wrong type
 // -2 is returned if a/the parameter has a wrong format
 
+
+// 1.1
+
 export function rgbToHex(r, g, b) {
-    if (![r, g, b].every(n => Number.isInteger(n) && n > 0)) return -1;
+    if (![r, g, b].every(n => Number.isInteger(n) && n > 0)) {
+        console.error("Values for r, g and b must be poitive integers.");
+        return -1;
+    }
     const toHex = (n) => {
-        const hex = n.toString(16);
+        const hex = n.toString(16).toUpperCase();
         return hex.length === 1 ? `0${hex}` : hex;
     }
     return "#" + toHex(r) + toHex(g) + toHex(b);
 }
 
+// 1.2
 export function rgbFunctionToHex(rgbFunc) {
     if (typeof rgbFunc !== 'string') {
         console.error('The argument must be a string');
@@ -28,16 +35,17 @@ export function rgbFunctionToHex(rgbFunc) {
 
     for (const cV of colorValues) {
         if (!cV.includes("%")) {
-            hexString += Number(cV).toString(16);
-        } else if (cV.indexOf("%") === cV.length - 1) {
+            hexString += Number(cV).toString(16).toUpperCase();
+        } else if (cV.endsWith("%")) {
             let cVPercentage = Number(cV.replace("%", ""));
             cVPercentage = Math.round(cVPercentage * 2.56);
-            hexString += cVPercentage.toString(16);
+            hexString += cVPercentage.toString(16).toUpperCase();
         } else console.error("% is not correctly placed" + cV);
     }
-    return hexString;
+    return "#" + hexString;
 }
 
+// 1.3
 export function hexToRgb(hexString, isPercentage) {
 
     if (typeof hexString !== 'string') {
@@ -76,5 +84,4 @@ const shortHexToLongHex = (hexString) => {
         result += hexString.charAt(i);
     }
     return result;
-};
-
+}
