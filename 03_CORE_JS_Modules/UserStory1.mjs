@@ -1,9 +1,9 @@
 // -1 is returned if a/the parameter has the wrong type
 // -2 is returned if a/the parameter has a wrong format
 
+export const rgbFuncPattern = /rgb\(\d{1,3}%?,\d{1,3}%?,\d{1,3}%?\)/;
 
 // 1.1
-
 export function rgbToHex(r, g, b) {
     if (![r, g, b].every(n => Number.isInteger(n) && n > 0)) {
         console.error("Values for r, g and b must be poitive integers.");
@@ -22,7 +22,7 @@ export function rgbFunctionToHex(rgbFunc) {
         console.error('The argument must be a string');
         return -1;
     }
-    if (!rgbFunc.match(/rgb\(\d{1,3}%?,\d{1,3}%?,\d{1,3}%?\)/)) {
+    if (!rgbFunc.match(rgbFuncPattern)) {
         console.error("The argument must be a functional rgb() notation like 'rgb(187,22%,88)'");
         return -2;
     }
@@ -35,12 +35,15 @@ export function rgbFunctionToHex(rgbFunc) {
 
     for (const cV of colorValues) {
         if (!cV.includes("%")) {
-            hexString += Number(cV).toString(16).toUpperCase();
+            hexString += cV.toString(16).length === 1 ? "0" + cV.toString(16).toUpperCase() : Number(cV).toString(16).toUpperCase();
         } else if (cV.endsWith("%")) {
             let cVPercentage = Number(cV.replace("%", ""));
             cVPercentage = Math.round(cVPercentage * 2.56);
             hexString += cVPercentage.toString(16).toUpperCase();
-        } else console.error("% is not correctly placed" + cV);
+        } else {
+            console.error("% is not correctly placed" + cV);
+            return -2;
+        }
     }
     return "#" + hexString;
 }
@@ -64,14 +67,14 @@ export function hexToRgb(hexString, isPercentage) {
     } else {
         let result = "rgb(";
         const r = parseInt(hexString.substring(0, 2), 16),
-            g = parseInt(hexString.substring(2, 4),16),
+            g = parseInt(hexString.substring(2, 4), 16),
             b = parseInt(hexString.substring(4, 6), 16);
 
-        if(!isPercentage) {
+        if (!isPercentage) {
             result += `${r}, ${g}, ${b})`;
             return result;
         } else {
-            result += `${Math.round(r/2.56)}%, ${Math.round(g/2.56)}%, ${Math.round(b/2.56)}%)`;
+            result += `${Math.round(r / 2.56)}%, ${Math.round(g / 2.56)}%, ${Math.round(b / 2.56)}%)`;
             return result;
         }
     }
