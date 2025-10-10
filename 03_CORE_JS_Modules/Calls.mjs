@@ -24,19 +24,23 @@ console.log(hexToRgb("#fa3", true) + "\n");
 // 2
 console.log("\nUser Story 2:\n");
 console.log(convert("#C4A") + "\n");
+console.log(convert("#C4A", true) + "\n");
 console.log(convert("#f11") + "\n");
 console.log(convert("rgb(12%,7%,0%)") + "\n");
 console.log(convert("rgb(50,50,50)") + "\n");
 console.log(convert("rgb(12,42,140)") + "\n");
 console.log(convert("rgb(50%,50%,50%)") + "\n");
+console.log(convert("Hello") + "\n");
+console.log(convert(123) + "\n");
 
 
 
 // 3
+console.log("\nUser Story 3:\n")
 const colors = [primary, secondary, tertiary];
 console.log(colors);
 let convertedColors = [];
 colors.forEach(color => {
-   convertedColors.push(convert(color));
+    convertedColors.push(convert(color));
 });
-console.log(convertedColors)
+console.log(convertedColors);
