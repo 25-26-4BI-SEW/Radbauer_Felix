@@ -10,7 +10,7 @@ export function rgbToHex(r, g, b) {
         return -1;
     }
     const toHex = (n) => {
-        const hex = n.toString(16).toUpperCase();
+        const hex = String(parseInt(n, 16)).toUpperCase();
         return hex.length === 1 ? `0${hex}` : hex;
     }
     return "#" + toHex(r) + toHex(g) + toHex(b);
@@ -27,24 +27,22 @@ export function rgbFunctionToHex(rgbFunc) {
         return -2;
     }
 
-    rgbFunc = rgbFunc.replace("rgb(", "");
-    rgbFunc = rgbFunc.replace(")", "");
-
+    rgbFunc = rgbFunc.replace("rgb(", "").replace(")", "");
     const colorValues = rgbFunc.split(",");
     let hexString = "";
 
     for (const cV of colorValues) {
-        if (!cV.includes("%")) {
-            hexString += cV.toString(16).length === 1 ? "0" + cV.toString(16).toUpperCase() : Number(cV).toString(16).toUpperCase();
-        } else if (cV.endsWith("%")) {
-            let cVPercentage = Number(cV.replace("%", ""));
-            cVPercentage = Math.round(cVPercentage * 2.56);
-            hexString += cVPercentage.toString(16).toUpperCase();
+        const trimmed = cV.trim();
+        if (trimmed.endsWith("%")) {
+            let percent = parseFloat(trimmed.replace("%", ""));
+            let val = Math.round(percent * 2.55);
+            hexString += val.toString(16).padStart(2, "0").toUpperCase();
         } else {
-            console.error("% is not correctly placed" + cV);
-            return -2;
+            const val = Number(trimmed);
+            hexString += val.toString(16).padStart(2, "0").toUpperCase();
         }
     }
+
     return "#" + hexString;
 }
 
