@@ -1,11 +1,14 @@
 <script setup>
 import { onMounted, ref, watch } from "vue";
 
+const emit = defineEmits(["addEvent", "clearTodos"]);
+
 const text = ref("");
 const warning = ref("");
 const warningTemplate = "Todos should not be longer than 50 characters";
 const inputRef = ref(null);
 
+// automatically focus input on page load
 onMounted(() => {
 	if (inputRef.value) {
 		inputRef.value.focus();
@@ -18,12 +21,11 @@ watch(text, (newValue) => {
 	} else {
 		warning.value = ""
 	}
-}, { immediate: true }); // This ensures it runs on page load
+}, { immediate: true });
 
-const emit = defineEmits(["addEvent", "clearTodos"]);
 
 function add() {
-	if (text.value === "" || !text.value) return;
+	if (text.value === "" || !text.value || text.value.length > 50) return;
 	emit("addEvent", text.value);
 	text.value = "";
 	inputRef.value.focus();
@@ -34,8 +36,10 @@ function add() {
 	<div class="input-wrapper">
 		<input type="text" v-model="text" @keyup.enter="add" placeholder="Add a new todo"
 			:class="{ 'has-warning': warning }" ref="inputRef" />
-		<button @click="add">Add Todo</button>
-		<button @click="emit('clearTodos')">Clear Todos</button>
+		<div id="button-container">
+			<button @click="add">Add Todo</button>
+			<button @click="emit('clearTodos')">Clear Todos</button>
+		</div>
 		<p v-if="warning" class="warning-text">{{ warning }}</p>
 	</div>
 </template>
@@ -70,5 +74,12 @@ button {
 input.has-warning {
 	border-color: red;
 	outline-color: red;
+}
+
+#button-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
 }
 </style>
