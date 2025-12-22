@@ -20,6 +20,7 @@ export default {
             return `${days}d ${hours}h ${minutes}m`;
         }
     },
+
     methods: {
         toggleCompleted() {
             this.$emit("update:isCompleted", !this.isCompleted);
@@ -39,12 +40,13 @@ export default {
 </template>
 
 <style scoped>
-/*td.done-cell {
+td.done-cell {
     cursor: pointer;
     font-size: 1.2rem;
 }
+
 td {
     border: solid 1px white;
     text-align: center;
-}*/
+}
 </style>
