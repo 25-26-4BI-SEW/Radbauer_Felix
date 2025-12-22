@@ -1,12 +1,3 @@
-<template>
-    <h1>TODO App</h1>
-    <Input
-        @addEvent="putTodoInArray"
-        @clearTodos="clearAllTodos"
-    />
-    <TodoList :todos="todos"/>
-</template>
-
 <script setup>
 import Input from "./components/Input.vue";
 import TodoList from "./components/TodoList.vue";
@@ -46,3 +37,9 @@ const clearAllTodos = () => {
     localStorage.removeItem("todos");
 };
 </script>
+
+<template>
+    <h1>TODO App</h1>
+    <Input @addEvent="putTodoInArray" @clearTodos="clearAllTodos" />
+    <TodoList :todos="todos" />
+</template>
