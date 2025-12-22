@@ -1,9 +1,16 @@
 <script setup>
-import { ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 
 const text = ref("");
 const warning = ref("");
 const warningTemplate = "Todos should not be longer than 50 characters";
+const inputRef = ref(null);
+
+onMounted(() => {
+	if (inputRef.value) {
+		inputRef.value.focus();
+	}
+});
 
 watch(text, (newValue) => {
 	if (newValue.length > 50) {
@@ -19,13 +26,14 @@ function add() {
 	if (text.value === "" || !text.value) return;
 	emit("addEvent", text.value);
 	text.value = "";
+	inputRef.value.focus();
 }
 </script>
 
 <template>
 	<div class="input-wrapper">
 		<input type="text" v-model="text" @keyup.enter="add" placeholder="Add a new todo"
-			:class="{ 'has-warning': warning }" />
+			:class="{ 'has-warning': warning }" ref="inputRef" />
 		<button @click="add">Add Todo</button>
 		<button @click="emit('clearTodos')">Clear Todos</button>
 		<p v-if="warning" class="warning-text">{{ warning }}</p>
