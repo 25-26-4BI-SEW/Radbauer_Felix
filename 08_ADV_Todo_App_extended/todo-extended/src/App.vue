@@ -36,10 +36,14 @@ const clearAllTodos = () => {
     todos.value = [];
     localStorage.removeItem("todos");
 };
+
+const removeCompleted = () => {
+    todos.value = todos.value.filter(todo => !todo.isCompleted);
+};
 </script>
 
 <template>
     <h1>TODO App</h1>
     <Input @addEvent="putTodoInArray" @clearTodos="clearAllTodos" />
-    <TodoList :todos="todos" />
+    <TodoList :todos="todos" @remove-completed="removeCompleted" />
 </template>

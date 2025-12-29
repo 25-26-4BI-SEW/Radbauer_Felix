@@ -16,11 +16,12 @@ onMounted(() => {
 });
 
 watch(text, (newValue) => {
-	if (newValue.length > 50) {
-		warning.value = warningTemplate
-	} else {
-		warning.value = ""
-	}
+	// if (newValue.length > 50) {
+	// 	warning.value = warningTemplate
+	// } else {
+	// 	warning.value = ""
+	// }
+	warning.value = newValue.length < 50 ? "" : warningTemplate;
 }, { immediate: true });
 
 
