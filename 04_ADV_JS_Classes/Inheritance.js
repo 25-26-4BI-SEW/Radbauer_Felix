@@ -22,7 +22,7 @@ class Dog extends Animal {
     }
 
     info() {
-        return super.describe() + ` and is of the breed ${this.breed}`;
+        return this.describe() + ` and is of the breed ${this.breed}`;
     }
 }
 

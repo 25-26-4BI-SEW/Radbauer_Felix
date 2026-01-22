@@ -2,14 +2,12 @@ class Complex {
     #imaginary;
     #real;
 
-    constructor(real, imaginary) {
-        if (!real && !imaginary) {
-            this.#real = 0;
-            this.#imaginary = 0;
-        } else if (!real || !imaginary) {
-            this.#real = real;
+    constructor(real=0, imaginary=0) {
+        if (real instanceof Complex) {
+            this.#real = real.real;
+            this.#imaginary = real.imaginary;
         }
-        if (imaginary && real) {
+        else if (typeof imaginary === 'number' && typeof real === 'number') {
             this.#real = real;
             this.#imaginary = imaginary;
         }
@@ -91,3 +89,11 @@ c4.add(12, 4);
 console.log("c4: ", c4.toString());
 c4.add(c1);
 console.log("c4: ", c4.toString());
+
+console.log(c4.imaginary);
+
+const c5 = new Complex(new Complex(5, 3));
+console.log("c5: ", c5.toString());
+
+const c6 = new Complex(5);
+console.log("c6: ", c6.toString());
