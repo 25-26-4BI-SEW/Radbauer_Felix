@@ -35,6 +35,10 @@ const removeTodo = (id) => {
 
         <TodoForm @add-todo="addTodo" />
 
+        <p v-if="todos.length === 0" class="empty">
+            You have <strong>NO</strong> todos yet.
+        </p>
+
         <TransitionGroup name="fade" tag="ul" class="todo-list">
             <TodoItem v-for="todo in todos" :key="todo.id" @remove="removeTodo(todo.id)">
                 <template #default>
@@ -57,14 +61,23 @@ const removeTodo = (id) => {
     list-style: none;
 }
 
-/* Fade transition */
+
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity 0.3s ease;
+    transition: opacity 0.5s ease-in-out;
 }
 
 .fade-enter-from,
 .fade-leave-to {
     opacity: 0;
 }
+
+p.empty {
+    margin-top: 2rem;
+    color: #bbb;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+
 </style>
