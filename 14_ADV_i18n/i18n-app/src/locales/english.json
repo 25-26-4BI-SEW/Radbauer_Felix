@@ -1,0 +1,13 @@
+{
+    "nav": {
+        "title": "Multi-lingual Website"
+    },
+    "content": {
+        "msg1": "There is | There are",
+        "product": "no products | product | products",
+        "msg2": "in your cart.",
+        "number": "Number | Numbers",
+        "longDate": "Long date",
+        "shortDate": "Short date"
+    }
+}

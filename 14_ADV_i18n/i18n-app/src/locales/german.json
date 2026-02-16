@@ -1,0 +1,13 @@
+{
+    "nav": {
+        "title": "Mehrsprachige Webseite"
+    },
+    "content": {
+        "msg1": "Es liegt | Es liegen",
+        "product": "keine Produkte | Produkt | Produkte",
+        "msg2": "in deinem Einkaufswagen.",
+        "number": "Zahl | Zahlen",
+        "longDate": "Langes Datum",
+        "shortDate": "Kurzes Datum"
+    }
+}
