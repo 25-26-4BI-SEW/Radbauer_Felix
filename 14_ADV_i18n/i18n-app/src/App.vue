@@ -16,7 +16,7 @@ const text = computed(() => `${t("content.msg1", counter.value)} ${counter.value
         <nav>
             <h1>{{ t('nav.title') }} (i18n)</h1>
             <select id="locale-select" v-model="locale">
-                <option v-for="locale in availableLocales" :key="locale">{{ locale }}</option>
+                <option v-for="loc in availableLocales" :key="loc">{{ loc }}</option>
             </select>
         </nav>
     </header>
