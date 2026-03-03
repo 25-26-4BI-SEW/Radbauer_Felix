@@ -26,7 +26,7 @@ function submit() {
 
 <template>
     <div class="form" @submit.prevent="submit">
-        <input ref="textareaRef" v-model="text" placeholder="Write your TODO..." @keydown.enter="submit"/>        
+        <input ref="textareaRef" v-model="text" placeholder="Write your TODO..." @keydown.enter="submit"/>     
         
         <button :disabled="warning">
             Add Todo
