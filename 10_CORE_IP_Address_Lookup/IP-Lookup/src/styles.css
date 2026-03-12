@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=Syne:wght@700;800&display=swap');
+
+/* ── Reset & root ─────────────────────────────────────── */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+:root {
+	--bg: #0b0c0e;
+	--surface: #111316;
+	--border: #1f2228;
+	--amber: #e8a020;
+	--amber-dim: #7a4f08;
+	--text: #c8cdd6;
+	--text-dim: #4a5060;
+	--mono: 'IBM Plex Mono', monospace;
+	--display: 'Syne', sans-serif;
+}
+
+body {
+	background-color: var(--bg);
+	color: var(--text);
+	font-family: var(--mono);
+	min-height: 100vh;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	padding: 4rem 1.5rem;
+
+	/* subtle scanline overlay */
+	background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, 0.015) 2px, rgba(255, 255, 255, 0.015) 4px);
+}
+
+/* ── App wrapper ──────────────────────────────────────── */
+#app {
+	width: 100%;
+	max-width: 560px;
+}
+
+/* ── Heading ──────────────────────────────────────────── */
+#app::before {
+	content: 'HOST LOOKUP';
+	display: block;
+	font-family: var(--display);
+	font-size: 1rem;
+	font-weight: 800;
+	letter-spacing: 0.3em;
+	color: var(--amber);
+	margin-bottom: 2rem;
+	padding-bottom: 0.75rem;
+	border-bottom: 1px solid var(--border);
+}
+
+/* ── Input ────────────────────────────────────────────── */
+#domain {
+	width: 100%;
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-left: 3px solid var(--amber);
+	color: var(--text);
+	font-family: var(--mono);
+	font-size: 0.95rem;
+	padding: 0.75rem 1rem;
+	outline: none;
+	transition: border-color 0.2s, box-shadow 0.2s;
+	caret-color: var(--amber);
+}
+
+#domain::placeholder {
+	color: var(--text-dim);
+}
+
+#domain:focus {
+	border-color: var(--amber);
+	box-shadow: 0 0 0 1px var(--amber-dim), 0 0 24px rgba(232, 160, 32, 0.06);
+}
+
+/* ── Status messages ─────────────────────────────────── */
+p {
+	margin-top: 1.5rem;
+	font-size: 0.8rem;
+	letter-spacing: 0.1em;
+	color: var(--text-dim);
+	animation: blink 1.1s step-end infinite;
+}
+
+@keyframes blink {
+	50% {
+		opacity: 0.3;
+	}
+}
+
+/* ── Data list ───────────────────────────────────────── */
+#data-list {
+	margin-top: 1.5rem;
+	list-style: none;
+	border: 1px solid var(--border);
+	background: var(--surface);
+	animation: fadeSlideIn 0.35s ease both;
+}
+
+@keyframes fadeSlideIn {
+	from {
+		opacity: 0;
+		transform: translateY(6px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+#data-list li {
+	display: grid;
+	grid-template-columns: 1fr;
+	padding: 0.6rem 1rem;
+	font-size: 0.82rem;
+	border-bottom: 1px solid var(--border);
+	line-height: 1.5;
+	transition: background 0.15s;
+}
+
+#data-list li:last-child {
+	border-bottom: none;
+}
+
+#data-list li:hover {
+	background: rgba(232, 160, 32, 0.04);
+}
+
+/* Treat the quoted key labels as a muted prefix */
+/* #data-list li::before {
+  content: '›';
+  display: inline;
+  color: var(--amber-dim);
+  margin-right: 0.5rem;
+} */
+
+.key {
+	color: var(--text-dim);
+	margin-right: 0.75rem;
+	min-width: 9ch;
+	display: inline-block;
+}
+
+.key::after {
+	content: ':';
+}
