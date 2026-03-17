@@ -52,7 +52,7 @@ watchDebounced(domain, async (newVal) => {
 		error.value = '';
 		try {
 			await fetchIPData();
-			await Promise.all([
+			await Promise.any([
 				fetchSunTimes(dataObj.coordinates.latitude, dataObj.coordinates.longitude),
 				fetchWeather(dataObj.coordinates.latitude, dataObj.coordinates.longitude)
 			]);
