@@ -38,7 +38,7 @@ onMounted(() => {
 
 		<ul>
 			<li v-for="recipe in recipeList" :key="recipe.id">
-				<RouterLink :to="`/recipe/${recipe.id}`">
+				<RouterLink :to="{ name: 'recipe-detail', params: { id: recipe.id }, state: { recipe } }">
 					<img :src="recipe.image" :alt="`image of ${recipe.title}`" />
 					<span>{{ recipe.title }}</span>
 				</RouterLink>
