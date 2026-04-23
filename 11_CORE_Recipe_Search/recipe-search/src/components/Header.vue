@@ -1,11 +1,10 @@
 <script setup>
+import { RouterLink } from 'vue-router';
 </script>
 
 <template>
     <header class="header">
-        <div class="container">
-            <RouterLink to="/"><h1>RecipeApp</h1></RouterLink>
-        </div>
+        <RouterLink to="/"><h1>RecipeApp</h1></RouterLink>
     </header>
 </template>
 
@@ -15,11 +14,8 @@
     color: white;
     padding: 1rem 0;
     text-align: center;
-}
-
-.container {
-  min-width: 1100px;
-  margin: 0 auto;
+    margin: 0 auto;
+    min-width: 1100px;
 }
 
 </style>

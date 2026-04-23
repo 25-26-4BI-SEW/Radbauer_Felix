@@ -13,7 +13,6 @@ const apiKey_1 = import.meta.env.VITE_API_KEY_1;
 
 const fetchRecipeDetails = async () => {
 	try {
-		// First try to use the recipe data passed from the list view
 		if (history.state && history.state.recipe) {
 			recipe.value = history.state.recipe;
 			console.log('Using recipe data from router state:', recipe.value);
@@ -21,7 +20,7 @@ const fetchRecipeDetails = async () => {
 			return;
 		}
 
-		// Fallback: fetch from API if no data was passed (direct navigation)
+		// Fallback
 		const response = await axios.get(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey_1}`);
 		recipe.value = response.data;
 		console.log('Recipe details from API:', recipe.value);
@@ -102,6 +101,8 @@ div {
 .recipe-detail {
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 	gap: 2rem;
 }
 

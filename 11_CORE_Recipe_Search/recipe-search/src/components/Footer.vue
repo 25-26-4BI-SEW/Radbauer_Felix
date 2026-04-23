@@ -1,4 +1,6 @@
-<script setup>import { RouterLink } from 'vue-router'</script>
+<script setup>
+import { RouterLink } from 'vue-router';
+</script>
 
 <template>
   <footer class="footer">
@@ -6,7 +8,7 @@
       <p>© 2026 RecipeApp</p>
       <RouterLink :to="{ name: 'impressum' }">Impressum</RouterLink>
       <RouterLink to="/">Main Page</RouterLink>
-      <p class="sub">Built with Vue 3</p>
+      <p class="sub">Built with Vue 3 & Vue Router</p>
     </div>
   </footer>
 </template>

@@ -10,7 +10,7 @@ const recipeList = ref([]);
 const errorMessage = ref('');
 
 const apiKey_1 = import.meta.env.VITE_API_KEY_1;
-const apiKey_2 = import.meta.env.VITE_API_KEY_2;
+// const apiKey_2 = import.meta.env.VITE_API_KEY_2;
 
 watchDebounced(recipeKeyword, async () => {
 	try {
