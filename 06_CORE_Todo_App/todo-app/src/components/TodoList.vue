@@ -2,34 +2,31 @@
 import Todo from "./Todo.vue";
 
 defineProps({
-    todos: Array
-})
+    todos: {
+        type: Array,
+        required: true,
+    }
+});
 </script>
 
 <template>
-    <table v-if="todos.length > 0">
+    <table v-if="todos && todos.length > 0">
         <thead>
-            <tr>
-                <th>Todo</th>
-                <th>Created</th>
-                <th>Done</th>
-            </tr>
+        <tr>
+            <th>Todo</th>
+            <th>Created</th>
+            <th>Done</th>
+        </tr>
         </thead>
         <tbody>
-            <Todo
-                v-for="item in todos"
-                :description="item.description"
-                :time="item.time"
-                v-model:isCompleted="item.isCompleted"
-            />
+        <Todo
+            v-for="(item, index) in todos"
+            :key="index"
+            v-model:isCompleted="item.isCompleted"
+            :description="item.description"
+            :time="item.time"
+        />
         </tbody>
     </table>
     <div v-else class="no-todos">You have <strong>NO Todos!</strong></div>
 </template>
-
-<style scoped>
-.no-todos {
-    text-align: center;
-    margin-top: 2rem;
-}
-</style>

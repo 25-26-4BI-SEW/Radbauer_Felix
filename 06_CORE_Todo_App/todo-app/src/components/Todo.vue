@@ -43,4 +43,8 @@ td.done-cell {
     cursor: pointer;
     font-size: 1.2rem;
 }
+td {
+    border: solid 1px white;
+    text-align: center;
+}
 </style>
