@@ -1,3 +1,38 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useProductsStore, type NewProduct } from '../stores/products'
+
+const router = useRouter();
+const productsStore = useProductsStore();
+
+const form = ref<NewProduct>({
+    title: '',
+    price: 0,
+    description: '',
+    image: '',
+    categoryId: 1
+})
+
+const handleSubmit = async () => {
+    try {
+        await productsStore.addProduct(form.value)
+        // Reset form after successful submission
+        // form.value = {
+        //     title: '',
+        //     price: 0,
+        //     description: '',
+        //     image: ''
+        // }
+        // Navigate back to home
+        router.push('/')
+    } catch (error) {
+        // Error is handled in the store
+        console.error('Failed to add product:', error)
+    }
+}
+</script>
+
 <template>
     <main class="add-product-container">
         <h1>Add Product</h1>
@@ -38,41 +73,6 @@
         </form>
     </main>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useProductsStore, type NewProduct } from '../stores/products'
-
-const router = useRouter();
-const productsStore = useProductsStore();
-
-const form = ref<NewProduct>({
-    title: '',
-    price: 0,
-    description: '',
-    image: '',
-    categoryId: 1
-})
-
-const handleSubmit = async () => {
-    try {
-        await productsStore.addProduct(form.value)
-        // Reset form after successful submission
-        // form.value = {
-        //     title: '',
-        //     price: 0,
-        //     description: '',
-        //     image: ''
-        // }
-        // Navigate back to home
-        router.push('/')
-    } catch (error) {
-        // Error is handled in the store
-        console.error('Failed to add product:', error)
-    }
-}
-</script>
 
 <style scoped>
 .add-product-container {
