@@ -9,9 +9,7 @@ const store = useProductStore();
 
 const isEditing = computed(() => !!route.params.id);
 
-const existingProduct = isEditing.value
-    ? store.products.find(product => product.id === Number(route.params.id))
-    : null;
+const existingProduct = isEditing.value ? store.products.find(product => product.id === Number(route.params.id)) : null;
 
 const form = reactive({
     id: existingProduct?.id || null,

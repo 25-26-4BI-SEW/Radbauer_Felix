@@ -1,3 +1,17 @@
+<script setup>
+import { useProductStore } from '../stores/products'
+
+const props = defineProps({
+	product: Object
+});
+
+const store = useProductStore();
+
+function removeProduct() {
+	store.deleteProduct(props.product.id);
+}
+</script>
+
 <template>
 	<div class="card">
 		<img :src="product.image" :alt="product.title" />
@@ -23,20 +37,6 @@
 		</div>
 	</div>
 </template>
-
-<script setup>
-import { useProductStore } from '../stores/products'
-
-const props = defineProps({
-	product: Object
-})
-
-const store = useProductStore()
-
-function removeProduct() {
-	store.deleteProduct(props.product.id)
-}
-</script>
 
 <style scoped>
 .card {
