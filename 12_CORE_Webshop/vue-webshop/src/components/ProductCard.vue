@@ -1,5 +1,5 @@
 <script setup>
-import { useProductStore } from '../stores/products'
+import { useProductStore } from '../stores/products';
 
 const props = defineProps({
 	product: Object
@@ -84,6 +84,7 @@ h2 {
 	cursor: pointer;
 	color: white;
 	font-weight: bold;
+	font-size: large;
 }
 
 .edit-btn {
@@ -92,5 +93,9 @@ h2 {
 
 .delete-btn {
 	background: #e74c3c;
+}
+
+.delete-btn:hover {
+	text-decoration: underline;
 }
 </style>

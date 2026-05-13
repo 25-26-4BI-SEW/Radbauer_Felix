@@ -1,14 +1,18 @@
 <template>
-	<div class="grid">
+	<section class="grid" v-if="store.products.length">
 		<ProductCard v-for="product in store.products" :key="product.id" :product="product" />
-	</div>
+	</section>
+	<details v-else>
+		<summary>No products found</summary>
+		<p>There are no products available at the moment.</p>
+	</details>
 </template>
 
 <script setup>
-import { useProductStore } from '../stores/products'
-import ProductCard from '../components/ProductCard.vue'
+import { useProductStore } from '../stores/products';
+import ProductCard from '../components/ProductCard.vue';
 
-const store = useProductStore()
+const store = useProductStore();
 </script>
 
 <style scoped>
