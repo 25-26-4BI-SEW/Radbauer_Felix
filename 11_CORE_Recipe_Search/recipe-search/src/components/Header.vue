@@ -1,10 +1,6 @@
-<script setup>
-import { RouterLink } from 'vue-router';
-</script>
-
 <template>
     <header class="header">
-        <RouterLink to="/"><h1>RecipeApp</h1></RouterLink>
+        <router-link to="/"><h1>RecipeApp</h1></router-link>
     </header>
 </template>
 
