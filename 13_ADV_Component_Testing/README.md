@@ -8,4 +8,4 @@ SEW | Simple vue.js Component Tests
 - Create at least five meaningful unit tests.
 
 ## Skill(s)
-- [VueJS Component Testing](https://my.skilldisplay.eu/en/skill/2383/0)  
+- [VueJS Component Testing](https://my.skilldisplay.eu/en/skill/2383/0)
